@@ -1,0 +1,12 @@
+vocab_size: 10000
+context_length: 128
+d_model: 384
+num_layers: 12
+num_heads: 12
+d_ff: 1536
+rope_theta: 10000.0
+batch_size: 4
+warmup_steps: 5
+benchmark_steps: 100
+forward_only: false
+device: "cuda" 
