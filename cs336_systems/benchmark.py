@@ -7,7 +7,7 @@ from typing import Optional, Tuple
 import yaml
 from pathlib import Path
 from cs336_basics.model import BasicsTransformerLM # type: ignore
-
+import torch.cuda.nvtx as nvtx
 
 def load_config(config_path: str) -> dict:
     """Load configuration from YAML file."""
@@ -78,6 +78,8 @@ def benchmark_model(
     avg_backward_time = sum(backward_times) / len(backward_times) if not forward_only else 0.0
     
     return avg_forward_time, avg_backward_time
+
+
 
 
 def main():

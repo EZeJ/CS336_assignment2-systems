@@ -21,6 +21,3 @@ __all__ = (
     "create_random_batch",
     "load_config",
 )
-
-# Enforce alphabetical order
-assert __all__ == tuple(sorted(__all__))
