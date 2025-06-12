@@ -47,6 +47,9 @@ def benchmark_model_with_nvtx(
                 torch.cuda.synchronize()
             global_step += 1
 
+
+
+
     for step in range(benchmark_steps):
         with nvtx.range(f"step_{step}"):
             with nvtx.range("get_cosine_lr"):
@@ -54,24 +57,42 @@ def benchmark_model_with_nvtx(
             for group in optimizer.param_groups:
                 group['lr'] = lr
 
-            with nvtx.range("Forward Pass"):
-                outputs = model(batch)
+
+
+            with nvtx.range("Forward Pass with autocast"):
+                with torch.autocast("cuda", dtype=torch.bfloat16):
+                    outputs = model(batch)
                 if device == "cuda":
                     torch.cuda.synchronize()
 
+
+
             if not forward_only:
                 loss = outputs.mean()
+
+
                 with nvtx.range("Backward Pass"):
                     loss.backward()
+
+
                 with nvtx.range("optimizer.step"):
+                    # if step == 0: 
+                    #     torch.cuda.memory._record_memory_history(max_entries=1000000)
                     optimizer.step()
+
+                    # if step == 0: 
+                    #     torch.cuda.memory._dump_snapshot("./memProfiler/optimizer_memory_snapshot.pickle")
+                    #     torch.cuda.memory._record_memory_history(enabled=None)
+
                     optimizer.zero_grad()
                 if device == "cuda":
                     torch.cuda.synchronize()
 
             global_step += 1
 
-    return 0.0, 0.0  # You can return timing later if needed
+
+
+    return None
 
 
 def main():
