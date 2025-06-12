@@ -10,7 +10,7 @@ __pycache__/
 # C extensions
 *.so
 
-./memProfiler/memory_snapshot.pickle
+memProfiler/memory_snapshot.pickle
 
 # Distribution / packaging
 notebooks/
