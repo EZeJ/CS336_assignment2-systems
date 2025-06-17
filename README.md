@@ -1,5 +1,8 @@
 # CS336 Spring 2025 Assignment 2: Systems
 
+# Weighted Sum Performance between Triton and Torch
+![alt text](./images/weighted_sum_comparison.png)
+
 For a full description of the assignment, see the assignment handout at
 [cs336_spring2025_assignment2_systems.pdf](./cs336_spring2025_assignment2_systems.pdf)
 

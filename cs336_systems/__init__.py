@@ -15,9 +15,8 @@ from .tools import (
     beautify_latex_table,
 )
 
-__all__ = (
-    "benchmark_model",
-    "beautify_latex_table",
-    "create_random_batch",
-    "load_config",
+from .triton_weighted_sum import (
+    WeightedSumFunc
 )
+
+
